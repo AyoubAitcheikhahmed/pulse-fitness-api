@@ -16,6 +16,7 @@
         <module>usecase</module>
         <module>domain</module>
         <module>adapter</module>
+        <module>security</module>
     </modules>
 
     <properties>

@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>be.pulse</groupId>
+            <artifactId>adapter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>3.3.3</version>
@@ -22,13 +27,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>3.3.3</version>
-
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>3.3.3</version>
         </dependency>
     </dependencies>
 </project>
