@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  version: "1.0.0"
+  title: Discipline API
+servers:
+  - url: http://localhost:8080/
+tags:
+  - name: Discipline
+    description: Actions On Disciplines
+paths:
+  /discipline/list:
+    get:
+      summary: List all Disciplines
+      operationId: getDisciplineList
+      tags:
+        - disciplines
+      responses:
+        200:
+          description: A paged array of disciplines
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DisciplineResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /discipline:
+    get:
+      summary: Get one specified discipline
+      operationId: getDiscipline
+      tags:
+        - disciplines
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the discipline to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: A discipline object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisciplineResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /discipline/create:
+    post:
+      summary: Create a new discipline
+      operationId: createDiscipline
+      tags:
+        - disciplines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisciplineRequest'
+        required: true
+      responses:
+        204:
+          description: Discipline successfully created
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    DisciplineResponse:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - fee
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          description: The title of the discipline
+        description:
+          type: string
+          description: A description of the discipline
+        fee:
+          type: integer
+          description: The fee associated with the discipline
+    DisciplineRequest:
+      type: object
+      required:
+        - title
+        - description
+        - fee
+      properties:
+        title:
+          type: string
+          description: The title of the discipline
+        description:
+          type: string
+          description: A description of the discipline
+        fee:
+          type: integer
+          description: The fee associated with the discipline
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

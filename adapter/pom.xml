@@ -14,13 +14,18 @@
     <dependencies>
         <dependency>
             <groupId>be.pulse</groupId>
-            <artifactId>domain</artifactId>
-            <version>${project.version}</version>
+            <artifactId>usecase</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>be.pulse</groupId>
-            <artifactId>usecase</artifactId>
-            <version>${project.version}</version>
+            <artifactId>security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>be.pulse</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -73,17 +78,6 @@
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.6</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>3.3.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-            <version>3.3.3</version>
-        </dependency>
         <dependency>
             <groupId>io.azam.ulidj</groupId>
             <artifactId>ulidj</artifactId>
@@ -124,7 +118,7 @@
                                 <dateLibrary>java8-localdatetime</dateLibrary>
                                 <additionalModelTypeAnnotations>@lombok.Builder</additionalModelTypeAnnotations>
                                 <requestMappingMode>none</requestMappingMode>
-                                <skipDefaultInterfa1ce>true</skipDefaultInterfa1ce>
+                                <skipDefaultInterface>true</skipDefaultInterface>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <useBeanValidation>false</useBeanValidation>
                                 <useOptional>true</useOptional>

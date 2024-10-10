@@ -1,6 +1,6 @@
 package be.pulse.domain.member;
 
-import be.pulse.domain.member.validator.Creation;
+import be.pulse.domain.validator.Creation;
 
 public class MemberFactory {
     public Creation<Member> create(CreateMemberRequest request) {

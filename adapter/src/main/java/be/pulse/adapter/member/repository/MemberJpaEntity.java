@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class MemberJpaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
     private String id;
 
@@ -29,11 +29,17 @@ public class MemberJpaEntity {
     @Column(name = "LAST_NAME", nullable = false, unique = false, updatable = false)
     private String lastName;
 
-    @Column(name = "EMAIL", nullable = false, unique = false, updatable = false)
+    @Column(name = "EMAIL", nullable = false, unique = false, updatable = true)
     private String email;
 
     @Column(name = "BIRTHDAY", nullable = false, unique = false, updatable = false)
     private LocalDate birthday;
+
+    @Column(name = "PHONE", nullable = true, unique = false, updatable = true)
+    private String phone;
+
+    @Column(name = "ADDRESS", nullable = true, unique = false, updatable = true)
+    private String address;
 
     @CreatedDate
     @Column(name = "CREATED_DATE", nullable = true, updatable = false)
@@ -50,6 +56,8 @@ public class MemberJpaEntity {
         this.email = member.getEmail();
         this.birthday = member.getBirthDate();
         this.createdDate = LocalDateTime.now();
+        this.phone = member.getPhone();
+        this.address = member.getAddress();
     }
 
 }

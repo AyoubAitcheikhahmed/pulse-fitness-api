@@ -2,10 +2,11 @@ package be.pulse.usecase.member.usecase;
 
 import be.pulse.domain.member.Member;
 import be.pulse.domain.member.MemberFactory;
-import be.pulse.domain.member.validator.Creation;
-import be.pulse.domain.member.validator.Notification;
+import be.pulse.domain.validator.Creation;
+import be.pulse.domain.validator.Notification;
 import be.pulse.usecase.member.repository.MemberRepository;
 import be.pulse.domain.member.CreateMemberRequest;
+
 
 public class CreateMemberUseCase {
 

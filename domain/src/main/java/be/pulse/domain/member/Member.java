@@ -1,33 +1,38 @@
 package be.pulse.domain.member;
 
-import be.pulse.domain.member.validator.DateValidator;
-import be.pulse.domain.member.validator.Notification;
-import be.pulse.domain.member.validator.ObjectValidator;
-import be.pulse.domain.member.validator.Validatable;
+import be.pulse.domain.validator.Notification;
+import be.pulse.domain.validator.ObjectValidator;
+import be.pulse.domain.validator.Validatable;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
-public final class Member implements Validatable {
+public final class  Member implements Validatable {
 
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
     private String email;
+    private String phone;
+    private String address;
 
     public Member(CreateMemberRequest createMemberRequest) {
         this.firstName = createMemberRequest.firstName();
         this.lastName = createMemberRequest.lastName();
         this.birthDate = createMemberRequest.birthday();
         this.email = createMemberRequest.email();
+        this.phone = createMemberRequest.phone();
+        this.address = createMemberRequest.address();
     }
 
-    public Member(String firstName, String lastName, LocalDate birthday, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthday;
+    public Member(String address, String phone, String email, LocalDate birthDate, String lastName, String firstName) {
+        this.address = address;
+        this.phone = phone;
         this.email = email;
+        this.birthDate = birthDate;
+        this.lastName = lastName;
+        this.firstName = firstName;
     }
 
     @Override
@@ -37,7 +42,7 @@ public final class Member implements Validatable {
         ObjectValidator.notNull("lastName" , lastName, notification);
         ObjectValidator.notNull("birthday" , birthDate, notification);
         ObjectValidator.notNull("email" , email, notification);
-        DateValidator.validate(birthDate,notification);
+        ObjectValidator.notNull("phone" , phone, notification);
 
         return notification;
     }

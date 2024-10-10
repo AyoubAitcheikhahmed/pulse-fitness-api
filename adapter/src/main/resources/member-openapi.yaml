@@ -1,27 +1,19 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   version: "1.0.0"
   title: Member API
-  license:
-    name: MIT
 servers:
-  - url: http://api.pulse.com/v1
+  - url: http://localhost:8080/
+tags:
+  - name: Member
+    description: Actions On Members
 paths:
-  /members:
+  /member/list:
     get:
       summary: List all members
-      operationId: listMembers
+      operationId: getMemberList
       tags:
         - members
-      parameters:
-        - name: limit
-          in: query
-          description: How many members to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            maximum: 100
-            format: int32
       responses:
         200:
           description: A paged array of members
@@ -33,13 +25,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Members'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberResponse'
         default:
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /member:
+    get:
+      summary: Get one specified member
+      operationId: getMember
+      tags:
+        - members
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the member to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: A member object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /member/create:
     post:
       summary: Create a new member
       operationId: createMember
@@ -49,37 +71,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
         required: true
       responses:
-        201:
+        204:
           description: Member successfully created
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /members/{memberId}:
-    get:
-      summary: Get member details by ID
-      operationId: getMemberById
-      tags:
-        - members
-      parameters:
-        - name: memberId
-          in: path
-          required: true
-          description: The ID of the member to retrieve
-          schema:
-            type: string
-      responses:
-        200:
-          description: Member details retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Member'
         default:
           description: unexpected error
           content:
@@ -88,13 +84,47 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Member:
+    MemberResponse:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - birthDate
+        - email
+        - phone
+        - address
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+          description: The first name of the member
+        lastName:
+          type: string
+          description: The last name of the member
+        birthDate:
+          type: string
+          format: date
+          description: The birth date of the member
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          description: The phone number of the member
+        address:
+          type: string
+          description: The address of the member
+    MemberRequest:
       type: object
       required:
         - firstName
         - lastName
         - birthDate
         - email
+        - phone
+        - address
       properties:
         firstName:
           type: string
@@ -110,11 +140,12 @@ components:
           type: string
           format: email
           description: The email address of the member
-    Members:
-      type: array
-      maxItems: 100
-      items:
-        $ref: '#/components/schemas/Member'
+        phone:
+          type: string
+          description: The phone number of the member
+        address:
+          type: string
+          description: The address  of the member
     Error:
       type: object
       required:

@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"be.pulse"})
-@EnableJpaRepositories(basePackages = {"be.pulse"})
-@EntityScan(basePackages = {"be.pulse"})
+@EnableJpaRepositories(basePackages = {"be.pulse.adapter.member.repository"})
+@EntityScan(basePackages = {"be.pulse.adapter.member.repository"})
 public class Application {
 
     public static void main(String[] args) {

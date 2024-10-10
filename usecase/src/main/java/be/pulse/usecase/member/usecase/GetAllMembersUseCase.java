@@ -1,6 +1,7 @@
 package be.pulse.usecase.member.usecase;
 
 import be.pulse.domain.member.Member;
+import be.pulse.domain.member.MemberProjection;
 import be.pulse.usecase.member.repository.MemberRepository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class GetAllMembersUseCase {
         this.memberRepository = memberRepository;
     }
 
-    public List<Member> execute() {
+    public List<MemberProjection> execute() {
         return  memberRepository.findAll();
     }
 }
